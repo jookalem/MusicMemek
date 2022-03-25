@@ -12,7 +12,7 @@
         "OWNER_ID": {
             "description": "isi dengan id telegram Anda sebagai pemilik bot",
             "required": true,
-            "value": "2095208116"
+            "value": "860951678"
         },
         "ASS_ID": {
             "description": "isi dengan telegram id akun assistant",
@@ -47,7 +47,7 @@
         "GROUP": {
             "description": "Isi dengan username group tanpa @",
             "required": true,
-            "value": "SanjoSupportt"
+            "value": "JoniSupport"
         },
          "CHANNEL": {
             "description": "Isi dengan username channel tanpa @",
@@ -71,7 +71,7 @@
         },
         "UPSTREAM_REPO": {
             "description": "Jika Anda tidak tahu ini, Biarkan apa adanya ato di /skip",
-            "value": "https://github.com/jookalem/XoneMusic",
+            "value": "https://github.com/jookalem/MusicMemek",
             "required": true
         },
         "UPSTREAM_BRANCH": {
