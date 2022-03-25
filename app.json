@@ -2,7 +2,7 @@
     "name": "XoneMusic",
     "description": "Music allow you to stream music trought the telegram voice chat feature.",
     "keywords": ["music", "voice chat", "telegram"],
-    "repository": "https://github.com/jookalem/XoneMusic",
+    "repository": "github.com/jookalem/MusicMemek",
     "stack": "container",
     "env": {
         "SESSION_NAME": {
@@ -80,6 +80,11 @@
             "required": true
         },
         "MONGO_DB_URI": {
+            "description": "isi dengan url mongodb dapatkan dari mongodb.cloud.com (jangan gunakan milik saya di bawah!)",
+            "required": true,
+            "value": ""
+        },
+        "UPDATES_CHANNEL": {
             "description": "isi dengan url mongodb dapatkan dari mongodb.cloud.com (jangan gunakan milik saya di bawah!)",
             "required": true,
             "value": ""
