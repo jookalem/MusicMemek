@@ -132,6 +132,8 @@ def time_to_seconds(time):
     return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(":"))))
 
 
+UPDATES_CHANNEL = os.getenv("UPDATES_CHANNEL")
+
 chat_id = None
 DISABLED_GROUPS = []
 useer = "NaN"
@@ -185,7 +187,57 @@ async def music_onoff(_, message: Message):
 
 @Client.on_message(command(["play", f"play@{BOT_USERNAME}", "p"]))
 async def play(_, message: Message):
+    mmk = message.reply_to_message
     chat_id = message.chat.id
+    user_id = message.from_user.id
+    user_name = message.from_user.first_name
+    rpk = "[" + user_name + "](tg://user?id=" + str(user_id) + ")"
+    global que
+    global useer
+    if chat_id in DISABLED_GROUPS:
+        return await message.reply_text(
+            f"😕 **Maaf kak {message.from_user.mention}, Musicnya sedang tidak aktif,tag Admin untuk mengaktifkan**" 
+        )
+        return
+    if chat_id in BANNED_USERS:
+        await app.send_message(
+            chat_id,
+            text=f"**❌ Anda telah di ban\nUbtuk menggunakan bot anda harus join di [Group](https://t.me/{UPDATES_CHANNEL})**",
+            reply_to_message_id=message.message_id,
+        )
+        return
+    ## Doing Force Sub 🤣
+    update_channel = UPDATES_CHANNEL
+    if update_channel:
+        try:
+            user = await app.get_chat_member(update_channel, user_id)
+            if user.status == "kicked":
+                await app.send_message(
+                    chat_id,
+                    text=f"**❌ Anda telah di ban\nUbtuk menggunakan bot anda harus join di [Group](https://t.me/{UPDATES_CHANNEL})**",
+                    parse_mode="markdown",
+                    disable_web_page_preview=True,
+                )
+                return
+        except UserNotParticipant:
+            await app.send_message(
+                chat_id,
+                text=f"""
+**👋 ʜᴀʟᴏ​ {rpk} ᴜɴᴛᴜᴋ ᴍᴇɴɢʜɪɴᴅᴀʀɪ ᴘᴇɴɢɢᴜɴᴀᴀɴ ʏᴀɴɢ ʙᴇʀʟᴇʙɪʜᴀɴ ʙᴏᴛ ɪɴɪ ᴅɪ ᴋʜᴜsᴜsᴋᴀɴ ᴜɴᴛᴜᴋ ʏᴀɴɢ sᴜᴅᴀʜ ᴊᴏɪɴ ᴅɪ ᴄʜᴀɴɴᴇʟ ᴋᴀᴍɪ!​!**
+""",
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                                " ᴊᴏɪɴ ᴄʜ sᴜᴘᴘᴏʀᴛ ",
+                                url=f"https://t.me/{update_channel}",
+                            )
+                        ]
+                    ]
+                ),
+                parse_mode="markdown",
+            )
+            return
     if message.sender_chat:
         return await message.reply_text(
             """
